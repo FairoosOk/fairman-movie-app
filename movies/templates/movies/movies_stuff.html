@@ -1,0 +1,15 @@
+<html>
+	<body>
+		<h1 style= "color:blue;text-align:center;"> GOOOOOGLE </h1>
+
+		<form action="" name="search" style="text-align:center">
+			<input type="text" name="query" value="{{request.GET.query}}" id="" />
+			<input type="submit" value="Search" id="" />
+		</form>
+
+		{% for movie in search_result %}
+     		<p>{{movie.fields.Name}}</p>
+     		<img src="{{movie.fields.Pictures.0.url}}" alt="" />
+		{% endfor %}
+	</body>
+</html>
