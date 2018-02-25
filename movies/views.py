@@ -17,4 +17,39 @@ def home_page(request):
 
 
 def create(request):
+    if request.method == "POST":
+        data={
+            'Name': request.POST.get('name'),
+            'Pictures': [{'url':request.POST.get('url')}],
+            'Rating': int(request.POST.get('rating')),
+            'Notes' : request.POST.get('notes')
+           }
+        response = AT.insert(data)
+
+        #notify on create
+        messages.success(request,'New Movie Added: {}'.format(response['fields'].get('Name')))
+    return redirect('/')
+
+def edit(request, movie_id):
+    if request.method == "POST":
+        data={
+            'Name': request.POST.get('name'),
+            'Pictures': [{'url':request.POST.get('url')}],
+            'Rating': int(request.POST.get('rating')),
+            'Notes': request.POST.get('notes')
+             }
+
+        response = AT.update(movie_id,data)
+
+        #notify on update
+        messages.success(request,'Updated Movie: {}'.format(response['fields'].get('Name')))
+    return redirect('/')
+
+def delete(request, movie_id):
+    movie_name=AT.get(movie_id)['fields'].get('Name')
+    AT.delete(movie_id)
+
+    #notify on delete
+    messages.warning(request,"Deleted Movie: {}".format(movie_name))
+
     return redirect('/')
