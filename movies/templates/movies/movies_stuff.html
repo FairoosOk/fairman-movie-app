@@ -57,7 +57,7 @@
                                 <button type="button" class="movies__item-expander hide" data-toggle="modal" data-target="#modal-{{movie.id}}">View Details</button>
                             	<img class="movies__item-image" src="{{ movie.fields.Pictures.0.url }}" alt="" />
                                 <div class="movies__item-title">
-                                	<p>{{ movie.fields.Name }}</p>
+                                	<p><a href="{{movie.fields.Trailer}}">{{ movie.fields.Name }}</a></p>
                                 </div>
                             </div>
                             {% include 'movies/detail-modal.html'%}
